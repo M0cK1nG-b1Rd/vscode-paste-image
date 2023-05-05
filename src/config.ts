@@ -30,6 +30,7 @@ class PasterConfig {
         let tpls:Map<string, string> = new Map();
         tpls.set("markdown", "![](${relativePath})");
         tpls.set("asciidoc", "image::${relativePath}[]");
+        tpls.set("latex", "\\begin{figure}[H]\n \\centering\n \\includegraphics[width=0.7\\textwidth]{${relativePath}}\n \\caption{输入标题}\n \\label{输入label}\n\\end{figure}");
 
         let tpl:string|undefined;
         tpls.forEach( (val, key) => {
@@ -91,7 +92,7 @@ class PredefinedVars {
             str = str.replace(key, val);
         });
         // User may be input a path with backward slashes (\), so need to replace all '\' to '/'.
-        return str.replace(/\\/g, '/');
+        return str.toString();
     }
 
     public set(key:string, val:string){
